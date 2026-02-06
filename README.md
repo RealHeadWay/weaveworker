@@ -1,98 +1,66 @@
-# Astro + Shadcn Starter
+# Weaveworker
 
-Welcome to the Astro + Shadcn Starter Template! This project is designed to help you get started quickly with [Astro](https://astro.build) and [Shadcn UI](https://ui.shadcn.com). It includes Tailwind CSS for styling and React for building interactive components.
+Weaveworker is a local-first **Automated Workforce OS** built with Astro, React, TypeScript, Tailwind, and shadcn/ui. It lets normal people hire AI workers, assign them to projects, and run deterministic automation through n8n — all while staying offline-capable with optional real-time sync.
 
-![astroxshadcn](https://github.com/user-attachments/assets/99b0b2a1-3ef9-4f28-a347-91c665279c2d)
+## What’s Included (Phase 1 MVP)
 
-## Table of Contents
+- Local-first workspace with Projects, Workers, Assets, Tasks, Threads, Flows, and Operations.
+- Jazz-ready domain schemas + migrations scaffolding.
+- Feature gating for Free vs Pro tiers.
+- n8n integration scaffold (connect, validate, run stubs).
+- Export/import service for JSON backups + Markdown memory packs.
+- Team + entitlement UI placeholders with role-aware navigation.
 
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [Project Structure](#project-structure)
-- [Usage](#usage)
-- [Important Notes About Astro & Shadcn](#important)
+## Tech Stack
 
-## Features
-
-- 🚀 **Astro** - Modern static site generator.
-- 🎨 **Shadcn UI** - Beautifully designed components built with Radix UI and Tailwind CSS.
-- 📦 **Tailwind CSS** - Utility-first CSS framework.
-- 🔥 **React** - Library for building user interfaces.
+- **Astro** for routing/layouts.
+- **React** for interactive pages (one React root per page).
+- **TypeScript** + **Tailwind** + **shadcn/ui** for UI.
+- **Jazz Framework** for local-first data + sync (schema scaffolding included; wire in Jazz provider next).
 
 ## Getting Started
 
-Follow these instructions to set up the project locally.
+```bash
+npm install
+npm run dev
+```
 
-### Prerequisites
+Open `http://localhost:4321` to view the app.
 
-Ensure you have the following installed:
+## Scripts
 
-- [Node.js](https://nodejs.org/en/download/)
-- [npm](https://www.npmjs.com/get-npm)
-
-### Installation
-
-1. **Clone the repository**:
-
-    ```sh
-    git clone https://github.com/your-username/astro-shadcn-starter.git
-    cd astro-shadcn-starter
-    ```
-
-2. **Install dependencies**:
-
-    ```sh
-    npm install
-    ```
-
-3. **Start the development server**:
-
-    ```sh
-    npm run dev
-    ```
-
-    Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+- `npm run dev` — local development
+- `npm run build` — production build + Astro check
+- `npm run preview` — preview build
 
 ## Project Structure
+
 ```
-├── public # Static assets
-├── src
-│ ├── components # React components
-│ ├────ui # Shadcn installed components
-│ ├── layouts # Layout components
-│ ├── pages # Astro pages
-│ ├── styles # Global styles
-│ └── utils # Utility functions
-├── astro.config.mjs # Astro configuration
-├── tailwind.config.mjs # Tailwind CSS configuration
-└── package.json # Project metadata and dependencies
+src/
+  components/
+    app/           # App shell + page components
+    ui/            # shadcn/ui primitives
+  domain/          # Schema + domain models
+  pages/           # Astro routes
+  services/        # n8n + entitlements + export/import
+  state/           # Local-first store + demo seed
+  styles/          # Tailwind globals
 ```
 
-## Usage
+## Architecture Notes
 
-### Adding a New Page
+- **Local-first data** lives in a single account root (ready for Jazz CoValues).
+- **Sync + Teams** are gated by entitlements and surfaced in UI.
+- **Automation** flows store n8n workflow JSON and execution logs.
+- **Account & Billing** lives in a separate Stripe dashboard and is deep-linked from `/account`.
 
-To add a new page, create a new `.astro` file in the `src/pages` directory.
+## Next Steps
 
-Example:
+1. Replace the local store with `jazz-react` providers and sync configuration.
+2. Wire in real n8n API calls for workflow validation and execution.
+3. Implement CRUD for all entities + export/import flows.
+4. Add authentication + entitlements backend for Pro.
 
-```astro
 ---
-import Layout from '../layouts/Layout.astro';
----
 
-<Layout title="New Page">
-  <h1>New Page</h1>
-  <p>This is a new page.</p>
-</Layout>
-```
-
-## Important
-
-Due to the static and island based nature of Astro, a lot of Shadcn components won't work out of the box, 
-some components such as the Avatar require more work on your side to enable them to work (see `src/components/Avatar.tsx`).
-
-You can find useful information on this from the following links:
-
-- [Issues with Astro Islands when using Shadcn](https://github.com/shadcn-ui/ui/issues/2249)
-- [Abstract components into react, ts components](https://github.com/shadcn-ui/ui/issues/2890)
+> Weaveworker is built to be resilient offline, collaborative online, and deterministic in production.
