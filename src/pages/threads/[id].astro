@@ -1,0 +1,11 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import '@/styles/globals.css';
+import { AppRoute } from '@/components/app/AppRoute';
+
+const { id } = Astro.params;
+---
+
+<Layout title="Weaveworker · Thread">
+  <AppRoute client:load view="thread-detail" id={id} />
+</Layout>
