@@ -1,0 +1,9 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import '@/styles/globals.css';
+import { AppRoute } from '@/components/app/AppRoute';
+---
+
+<Layout title="Weaveworker · Account">
+  <AppRoute client:load view="account" />
+</Layout>
